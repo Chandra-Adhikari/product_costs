@@ -1,7 +1,6 @@
 class Product < ApplicationRecord
 	
-	def self.rate_conversion
-		ip = request.ip
+	def self.rate_conversion(ip)
 		country_code = Geocoder.search(ip).first.country
 		country_details = ISO3166::Country[country_code]
 		currency = country_details.currency
