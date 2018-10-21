@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
 	def self.rate_conversion
 		ip = request.ip
-		country_code = Geocoder.search('172.17.0.1').first.country
+		country_code = Geocoder.search(ip).first.country
 		country_details = ISO3166::Country[country_code]
 		currency = country_details.currency
 		@rates = ActiveSupport::JSON.decode(`curl -X GET --header 'Accept:application/json; charset=utf-8' --header 'Content-Type:application/json; charset=utf-8' http://data.fixer.io/api/latest?%20access_key=875445857d892879bab80b04f45a0df5`)
