@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+	
 	def self.rate_conversion
 		ip = request.ip
 		country_code = Geocoder.search(ip).first.country
@@ -6,7 +7,7 @@ class Product < ApplicationRecord
 		currency = country_details.currency
 		@rates = ActiveSupport::JSON.decode(`curl -X GET --header 'Accept:application/json; charset=utf-8' --header 'Content-Type:application/json; charset=utf-8' http://data.fixer.io/api/latest?%20access_key=875445857d892879bab80b04f45a0df5`)
 
-		p rate = @rates["rates"][currency.iso_code]
+		rate = @rates["rates"][currency.iso_code]
 		@prices = Product.converted_rate(rate,currency)
 	end
 
