@@ -1,0 +1,40 @@
+<div class="content-wrapper">
+   <!-- Content Header (Page header) -->
+   <section class="content-header">
+     <h1> Products </h1>
+   </section>
+   <!-- Main content -->
+   <section class="content">
+    <div class="box box-info">
+           <div class="box-body">
+             <table id="example2" class="table table-bordered table-hover">
+               <thead>
+                 <tr>
+           				<th>Product Image</th>
+           				<th>Product Name</th>
+                   		<th>Price</th>
+
+           			</tr>
+               </thead>
+               <% @products.each do |product| %>
+                 <% unless product.eql?(nil) %>
+                   <tbody>
+                     <tr class="even">
+                       <td><%= product[:image].present? ? image_tag(product[:image],:size=> "70*80", :class => 'profile-ab') : image_tag("/1.png",:size=> "70*80", :class => 'profile-ab') %>
+                       </td>
+                       <td><%= truncate(product[:name], omision: "...", length: 30) %></td>
+                       <td>
+                        <%= product[:symbol]%><%= product[:price] %>
+                     </td>
+                       
+                     </tr>
+                   </tbody>
+                 <%end%>
+               <%end%>
+             </table>
+             <%= paginate @products %>
+           </div>
+         </div>
+   </section>
+   <!-- /.content -->
+ </div>
